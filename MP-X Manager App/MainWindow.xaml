@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MP_X_Manager_App"
         xmlns:Properties="clr-namespace:MP_X_Manager_App.Properties" x:Name="Window" x:Class="MP_X_Manager_App.MainWindow"
         mc:Ignorable="d"
-        Title="WINMP-X Manager" Height="478" Width="779" MinWidth="800" MinHeight="500" BorderThickness="0,0,0,5" BorderBrush="#FFC3C3C3" Padding="2">
+        Title="WINMP-X Manager" Height="500" Width="800" MinWidth="800" MinHeight="500" BorderThickness="0,0,0,5" BorderBrush="#FFC3C3C3" Padding="2">
     <Grid x:Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -23,8 +23,8 @@
         <Rectangle x:Name="GreenBar" Fill="#FF00AF00" ClipToBounds="True" StrokeThickness="0" Grid.ColumnSpan="2" Margin="0"/>
         <Rectangle x:Name="Shader" Fill="#FFC3C3C3" Grid.Row="1" Grid.RowSpan="4" ClipToBounds="True" StrokeThickness="0"/>
         <Button x:Name="MakeButton" Content="Make" Margin="10" Grid.Row="1" VerticalAlignment="Center" Height="30" FontSize="20" FontWeight="SemiBold" Width="60" HorizontalAlignment="Left" Background="#FF9B9B9B" BorderThickness="2" BorderBrush="#FF5B5B5B" Click="MakeButton_Click" Padding="0"/>
-        <TextBox x:Name="QuantityBox" Margin="80,10,10,10" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="18" Padding="3,0,0,0" Height="30" HorizontalAlignment="Right" MinWidth="140" BorderThickness="2" BorderBrush="#FF5B5B5B" Width="120"/>
-        <TextBlock x:Name="QuantityPlaceHolder" IsHitTestVisible="False" Text="Device quantity" VerticalAlignment="Center" Margin="80,10,10,10" Foreground="DarkGray" Grid.Row="1" FontStyle="Italic" TextWrapping="WrapWithOverflow" Padding="5,3,0,0" FontSize="18" Height="30" HorizontalAlignment="Right" MinWidth="140" Width="120">
+        <TextBox x:Name="QuantityBox" Margin="80,10,30,10" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="18" Padding="3,0,0,0" Height="30" HorizontalAlignment="Right" MinWidth="120" BorderThickness="2" BorderBrush="#FF5B5B5B" Width="120"/>
+        <TextBlock x:Name="QuantityPlaceHolder" IsHitTestVisible="False" Text="Device quantity" VerticalAlignment="Center" Margin="80,10,30,10" Foreground="DarkGray" Grid.Row="1" FontStyle="Italic" TextWrapping="WrapWithOverflow" Padding="5,3,0,0" FontSize="16" Height="30" HorizontalAlignment="Right" MinWidth="120" Width="120">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -36,9 +36,9 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <Button x:Name="StartButton" Content="Start" Margin="10" Grid.Row="2" VerticalAlignment="Center" Height="30" FontSize="20" FontWeight="SemiBold" Width="60" HorizontalAlignment="Left" Background="#FF9B9B9B" BorderThickness="2" BorderBrush="#FF5B5B5B" Click="StartButton_Click" Padding="0" IsEnabled="False"/>
-        <TextBox x:Name="PrecursorBox" Margin="80,10,10,10" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="18" Padding="3,0,0,0" Height="30" HorizontalAlignment="Right" MinWidth="140" BorderThickness="2" BorderBrush="#FF5B5B5B" Width="120" IsEnabled="False"/>
-        <TextBlock x:Name="PrecursorPlaceHolder" IsHitTestVisible="False" Text="ID precursor" VerticalAlignment="Center" Margin="80,10,10,10" Foreground="DarkGray" Grid.Row="2" FontStyle="Italic" TextWrapping="WrapWithOverflow" Padding="5,3,0,0" FontSize="18" Height="30" HorizontalAlignment="Right" MinWidth="140" Width="120">
+        <Button x:Name="StartButton" Content="Start" Margin="10,25,10,10" Grid.Row="2" VerticalAlignment="Center" Height="30" FontSize="20" FontWeight="SemiBold" Width="60" HorizontalAlignment="Left" Background="#FF9B9B9B" BorderThickness="2" BorderBrush="#FF5B5B5B" Click="StartButton_Click" Padding="0" IsEnabled="False"/>
+        <TextBox x:Name="PrecursorBox" Margin="80,25,30,10" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="18" Padding="3,0,0,0" Height="30" HorizontalAlignment="Right" MinWidth="120" BorderThickness="2" BorderBrush="#FF5B5B5B" Width="120" IsEnabled="False"/>
+        <TextBlock x:Name="PrecursorPlaceHolder" IsHitTestVisible="False" Text="ID precursor" VerticalAlignment="Center" Margin="80,25,30,10" Foreground="DarkGray" Grid.Row="2" FontStyle="Italic" TextWrapping="WrapWithOverflow" Padding="5,3,0,0" FontSize="16" Height="30" HorizontalAlignment="Right" MinWidth="120" Width="120">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -52,13 +52,13 @@
         </TextBlock>
         <GridSplitter x:Name="Divider" HorizontalAlignment="Stretch" Height="3" Grid.Row="3" VerticalAlignment="Top" Margin="10,7,10,0" Background="#FF5B5B5B"/>
         <Label x:Name="ListLabel" Content="MP-X Devices:" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="18" Height="30" FontWeight="SemiBold" HorizontalAlignment="Left" Padding="0,5,0,0"/>
-        <ListBox x:Name="MPXList" ItemsSource="{Binding procList}" Margin="10,40,10,0" Grid.Row="3" FontSize="18" Padding="5" BorderThickness="3" BorderBrush="#FF5B5B5B" IsSynchronizedWithCurrentItem="False" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
-        <Button x:Name="StopButton" Content="Stop" Margin="10" Grid.Row="4" VerticalAlignment="Center" Background="Red" BorderBrush="#FF400000" FontSize="20" Height="30" FontWeight="SemiBold" BorderThickness="2" Padding="0" VerticalContentAlignment="Center" Click="StopButton_Click" IsEnabled="False"/>
+        <ListBox x:Name="MPXList" ItemsSource="{Binding ProcList}" Margin="10,40,10,0" Grid.Row="3" FontSize="18" Padding="5" BorderThickness="3" BorderBrush="#FF5B5B5B" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MinWidth="140"/>
+        <Button x:Name="StopButton" Content="Stop" Margin="10" Grid.Row="4" VerticalAlignment="Center" Background="Red" BorderBrush="#FF400000" FontSize="20" Height="30" FontWeight="SemiBold" BorderThickness="2" Padding="0" VerticalContentAlignment="Center" Click="StopButton_Click" IsEnabled="False" MinWidth="210"/>
         <TextBox x:Name="ConsoleBox" Grid.Column="1" Margin="0" Grid.Row="2" TextWrapping="Wrap" Grid.RowSpan="3" Background="Black" Foreground="White" BorderThickness="0,4,0,2" Padding="5,3,0,3" VerticalScrollBarVisibility="Visible" BorderBrush="#FFC3C3C3" IsReadOnly="True"/>
         <Rectangle x:Name="DeviceLabelBorder" Grid.Column="1" Fill="#FFC3C3C3" HorizontalAlignment="Left" Height="34" Margin="6,0,0,0" Stroke="#FFC3C3C3" VerticalAlignment="Bottom" Width="246" Grid.Row="1"/>
-        <Label x:Name="DeviceLabel" Content="Device:" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" FontSize="20" VerticalAlignment="Bottom" Height="35" Padding="5,0" Background="Black" BorderThickness="0" BorderBrush="Black" Foreground="#FF00AF00" Margin="10,0,0,45" Grid.RowSpan="2" Width="238"/>
-        <TextBlock x:Name="DeviceLabelBox" Grid.Column="1" HorizontalAlignment="Left" Margin="83,0,0,46" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="1" FontSize="18" Height="34" Padding="5,2,5,0" UseLayoutRounding="True" Width="165" Background="Black" Foreground="White" Grid.RowSpan="2"/>
-        <TextBlock x:Name="DevicePlaceHolder" IsHitTestVisible="False" Text="No device selected..." VerticalAlignment="Bottom" Margin="83,0,0,0" Foreground="DarkGray" FontStyle="Italic" TextWrapping="WrapWithOverflow" Padding="5,2,5,0" FontSize="18" Height="30" HorizontalAlignment="Left" MinWidth="150" Grid.Column="1" Grid.Row="1" IsEnabled="False">
+        <Label x:Name="DeviceLabel" Content="Device:" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" FontSize="20" VerticalAlignment="Bottom" Height="35" Padding="5,0" Background="Black" BorderThickness="0" BorderBrush="Black" Foreground="#FF00AF00" Margin="10,0,0,60" Grid.RowSpan="2" Width="238"/>
+        <TextBlock x:Name="DeviceLabelBox" Grid.Column="1" HorizontalAlignment="Left" Margin="83,0,0,0" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="1" FontSize="18" Height="30" Padding="0,2,5,0" UseLayoutRounding="True" Width="165" Background="Black" Foreground="White"/>
+        <TextBlock x:Name="DevicePlaceHolder" IsHitTestVisible="False" Text="No device selected..." VerticalAlignment="Bottom" Margin="83,0,0,0" Foreground="DarkGray" FontStyle="Italic" Padding="0,3,2,0" FontSize="18" Height="30" HorizontalAlignment="Left" MinWidth="150" Grid.Column="1" Grid.Row="1" IsEnabled="False" Width="165">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -71,5 +71,6 @@
             </TextBlock.Style>
         </TextBlock>
         <Button x:Name="SynchButton" Content="Synch" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center" Grid.Row="1" FontSize="16" Click="SynchButton_Click" Width="50" BorderBrush="#FF5B5B5B" Background="#FF9B9B9B" BorderThickness="2" Height="30" VerticalContentAlignment="Center" Padding="0"/>
+        <CheckBox Content=" Replace all" HorizontalAlignment="Left" Margin="10,0,0,46" VerticalAlignment="Center" Width="0" Height="0" Padding="0" Grid.Row="2" BorderThickness="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderBrush="#FF5B5B5B" MinWidth="120" MinHeight="19" FontStyle="Italic" FontSize="14"/>
     </Grid>
 </Window>

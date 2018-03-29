@@ -8,60 +8,55 @@ using System.Windows;
 
 namespace MP_X_Manager_App
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private string[] Bin;
         private IList<string> DevicePaths = new List<string>();
-        //private IList<Process> procList = new List<Process>();
-        private ObservableCollection<Process> ViewBinding { get; set; }
+        public ObservableCollection<Process> ProcList { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
 
-            ViewBinding = new ObservableCollection<Process>();
+            ProcList = new ObservableCollection<Process>();
         }
 
         private void MakeButton_Click(object Sender, RoutedEventArgs E)
         {
-            foreach (char C in QuantityBox.Text)
-                if (!char.IsDigit(C))
-                {
-                    MessageBox.Show("Only positive integer values may be entered for device quantity: 1, 2, 3...");
-                    return;
-                }
-            
-            if (int.Parse(QuantityBox.Text) > 999)
+            if (QuantityBox.Text.Length == 0)
+                return;
+            else if (int.Parse(QuantityBox.Text) > 999)
             {
                 MessageBox.Show("Too many devices!");
                 return;
             }
 
+            foreach (char C in QuantityBox.Text)
+                if (!char.IsDigit(C))
+                {
+                    MessageBox.Show("Only positive integers may be entered for device quantity: 1, 2, 3...");
+                    return;
+                }
+
             for (int I = 1; I <= int.Parse(QuantityBox.Text); I++)
             {
                 string SubPath = $"c:\\_Temp\\_{I:D3}";
-                DirectoryInfo Dir;
 
                 if (!Directory.Exists(SubPath))
                 {
                     try
                     {
-                        Dir = Directory.CreateDirectory(SubPath);
+                        DirectoryInfo Dir = Directory.CreateDirectory(SubPath);
                     }
                     catch (Exception Ex)
                     {
                         MessageBox.Show($"Failed to create device #{I}: {Ex.Message}");
-
                         return;
                     }
                 }
                 TrashRemoval(SubPath, "*.exe");
                 TrashRemoval(SubPath, "*.dll");
-
                 RebuildDevices(SubPath, "*.exe");
                 RebuildDevices(SubPath, "*.dll");
                 DevicePaths.Add(Path.Combine(SubPath, "mpc.exe"));
@@ -100,10 +95,13 @@ namespace MP_X_Manager_App
 
         private void StartButton_Click(object Sender, RoutedEventArgs E)
         {
+            if (PrecursorBox.Text.Length == 0)
+                return;
+
             foreach (char C in PrecursorBox.Text)
                 if (!char.IsDigit(C))
                 {
-                    MessageBox.Show("Only positive integer values may be entered for the ID precursor: 1, 2, 3...");
+                    MessageBox.Show("Only positive integers may be entered for the ID precursor: 1, 2, 3...");
                     return;
                 }
 
@@ -113,19 +111,17 @@ namespace MP_X_Manager_App
                 {
                 FileName = Path,
                 Arguments = $"--id={int.Parse(PrecursorBox.Text)}{DevicePaths.IndexOf(Path) + 1} --webport=0",
-
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
-
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 };
-
+                
                 try
                 {
                     Process MPX = Process.Start(StartInfo);
                     new Thread(() => { MPX.WaitForExit(); }).Start();
-                    ViewBinding.Add(MPX);
+                    ProcList.Add(MPX);
                 }
                 catch (Exception Ex)
                 {
@@ -156,24 +152,13 @@ namespace MP_X_Manager_App
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ViewBinding.Count > 0)
-            {
-                foreach (Process Proc in ViewBinding)
+            if (ProcList.Count > 0)
+                foreach (Process Proc in ProcList)
                     Proc.Kill();
-                ViewBinding.Clear();
-            }
-            if (DevicePaths.Count > 0)
-            {
-                string Device;
-                foreach (string Dir in DevicePaths)
-                {
-                    Device = Path.GetDirectoryName(Dir);
-                    Directory.Delete(Device, true);
-                }
-            }
 
+            ProcList.Clear();
             DevicePaths.Clear();
-            StartButton.IsEnabled = StopButton.IsEnabled = false;
+            StartButton.IsEnabled = StopButton.IsEnabled = PrecursorBox.IsEnabled = false;
             MakeButton.IsEnabled = QuantityBox.IsEnabled = true;
         }
 
