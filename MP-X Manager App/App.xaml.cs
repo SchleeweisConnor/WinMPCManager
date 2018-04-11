@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MP_X_Manager_App
+namespace WinMPC_Manager
 {
     /// <summary>
     /// Interaction logic for App.xaml

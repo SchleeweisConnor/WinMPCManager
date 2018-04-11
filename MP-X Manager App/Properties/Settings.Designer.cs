@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MP_X_Manager_App.Properties
+namespace WinMPC_Manager.Properties
 {
 
 
